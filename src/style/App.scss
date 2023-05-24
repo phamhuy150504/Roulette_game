@@ -1,0 +1,116 @@
+$wheel-size: 350px;
+$number-width: 31px;
+$table-color: #246d15;
+$red: #841616;
+$background: #2b2b2b;
+$background-light: #313131;
+$background-dark: #252525;
+
+$mobile-width: 480px;
+$tablet-width: 768px;
+$desktop-width: 1280px;
+$width-per-height: calc(1vw / 1vh);
+
+@mixin mobile {
+	@media (max-width: #{$tablet-width - 1px}) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media (max-width: #{$desktop-width - 1px}) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: #{$desktop-width}) {
+		@content;
+	}
+}
+
+body {
+	margin: 0;
+}
+
+#game_container {
+	width: 100vw;
+	min-height: 100vh;
+	background-color: $background;
+	position: relative;
+	@include tablet {
+		padding-bottom: 2rem;
+	}
+	#wheel_and_table_container {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		width: 100%;
+		min-height: 50vh;
+		@include tablet {
+			flex-wrap: wrap;
+		}
+	}
+	#dashboard {
+		@include tablet {
+			position: relative;
+			margin-top: 15px;
+		}
+		position: absolute;
+		bottom: 5%;
+		transform: translate(-50%, 0);
+		left: 50%;
+		min-height: 20vh;
+		width: 90vw;
+		border-radius: 50px;
+		background-color: green;
+		padding: 2rem;
+		box-sizing: border-box;
+		background: $background;
+		box-shadow: inset 8px 8px 0px $background-dark, inset -8px -8px 0px $background-light;
+	}
+	#how_to_play_and_sound_container {
+		margin: 10px 5rem;
+		display: flex;
+		button {
+			padding: 5px 10px;
+			margin: 0 10px;
+			outline: none;
+			border: none;
+			cursor: pointer;
+			border-radius: 6px;
+			font-size: 1vw;
+			&:active {
+				transform: translate(2px, 2px);
+			}
+			&#pay_rule {
+				background-color: #1ed5ff;
+				box-shadow: -2px -2px 2px #1ab9de;
+			}
+			&#mute {
+				background-color: yellow;
+				box-shadow: -2px -2px 2px #dede00;
+				&.unmute {
+					background-color: red;
+					box-shadow: -2px -2px 2px #de0000;
+				}
+			}
+		}
+	}
+	#payout_img {
+		position: absolute;
+		transform: translate(-50%, -50%);
+		left: 50%;
+		top: 50%;
+		z-index: 4;
+		width: 50vw;
+		border-radius: 25px;
+		overflow: hidden;
+		img {
+			width: 100%;
+		}
+		&.d-none {
+			display: none;
+		}
+	}
+}
